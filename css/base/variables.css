@@ -1,0 +1,42 @@
+:root {
+    /* ===== Neutral ===== */
+    --base-color: #232323;
+    --surface-color: #2B2B2B;
+    --surface-light: #343434;
+    --surface-lighter: #404040;
+
+    --border-color: #4A4A4A;
+    --divider-color: #383838;
+
+    /* ===== Text ===== */
+    --text-color: #F0F0F0;
+    --text-secondary: #C8C8C8;
+    --text-muted: #9A9A9A;
+    --inverse-text-color: #232323;
+
+    /* ===== Brand (Green) ===== */
+    --brand-color: #007940;
+    --brand-light: #0E9D58;
+    --brand-lighter: #37C878;
+    --brand-dark: #005A30;
+    --brand-darker: #003D20;
+
+    /* ===== Accent (Yellow) ===== */
+    --accent-color: #E2D705;
+    --accent-light: #F0E84A;
+    --accent-dark: #C4B700;
+
+    /* ===== Feedback ===== */
+    --success-color: #22C55E;
+    --warning-color: #F59E0B;
+    --error-color: #EF4444;
+    --info-color: #3B82F6;
+
+    /* ===== Effects ===== */
+    --shadow-color: rgba(0, 0, 0, 0.35);
+    --overlay-color: rgba(0, 0, 0, 0.65);
+
+    /* ===== Gradients ===== */
+    --brand-gradient: linear-gradient(135deg, #007940 0%, #0E9D58 100%);
+    --hero-gradient: linear-gradient(180deg, #232323 0%, #2B2B2B 100%);
+}
