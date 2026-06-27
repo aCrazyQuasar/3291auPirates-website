@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maroon Rex Project Card</title>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.3.1/model-viewer.min.js"></script>
+    
+    <style>
+        /* Basic page setup */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #121212;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: #ffffff;
+        }
+
+        /* The main container card */
+        .card {
+            display: flex;
+            flex-direction: row;
+            width: 850px;
+            max-width: 90%;
+            height: 450px;
+            background-color: #1e1e1e;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid #2d2d2d;
+        }
+
+        /* Left Side: Content info */
+        .card-info {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .card-title {
+            font-size: 2rem;
+            margin: 0 0 10px 0;
+            font-weight: 700;
+            color: #ff4a5a; /* A vibrant maroon/red accent */
+        }
+
+        .card-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #b3b3b3;
+            margin: 0 0 30px 0;
+        }
+
+        /* GitHub Button Styling */
+        .github-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: fit-content;
+            padding: 12px 24px;
+            background-color: #2f363d;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
+
+        .github-btn:hover {
+            background-color: #444d56;
+        }
+
+        .github-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Right Side: 3D Model Viewer */
+        .card-viewer {
+            flex: 1;
+            background-color: #181818;
+            position: relative;
+        }
+
+        model-viewer {
+            width: 100%;
+            height: 100%;
+            --poster-color: transparent;
+        }
+
+        /* Responsive design for smaller screens (stacked layout) */
+        @media (max-width: 768px) {
+            .card {
+                flex-direction: column-reverse; /* Puts model on top for mobile */
+                height: auto;
+                max-width: 400px;
+            }
+            .card-viewer {
+                height: 300px;
+            }
+            .card-info {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        
+        <div class="card-info">
+            <h1 class="card-title">Maroon Rex</h1>
+            <p class="card-description">
+                Explore this high-fidelity 3D asset directly inside your browser. Drag to orbit around the character, scroll to zoom, or watch it spin automatically. Source files and updates are available on GitHub.
+            </p>
+            <a href="#" target="_blank" class="github-btn">
+                View on GitHub
+            </a>
+        </div>
+
+        <div class="card-viewer">
+            <model-viewer 
+                src="./Pearls-2025-26.glb" 
+                alt="Maroon Rex Interactive 3D Model" 
+                camera-controls 
+                auto-rotate 
+                shadow-intensity="1.5"
+                interaction-prompt="none">
+            </model-viewer>
+        </div>
+
+    </div>
+
+</body>
+</html>
