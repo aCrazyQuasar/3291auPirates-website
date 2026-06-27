@@ -1,34 +1,48 @@
 @font-face {
-  font-family: "The Rum is Gone";
-  src: url("../../assets/fonts/the-rum-is-gone.ttf");
+  font-family: "Pieces of Eight";
+  src: url("../../assets/fonts/pieces-of-eight.ttf");
 }
 @import url('https://fonts.googleapis.com/css2?family=Carme&display=swap');
 h1, h2, h3, h4, h5, h6 {
-    font-family: "The Rum is Gone", sans-serif;
+    font-family: "Pieces of Eight", sans-serif;
 }
-h1{
-    font-size: 3rem;
-    color: var(--text-color);
+h1 {
+  font-size: 3.5rem;    /* 56px - Perfect for main page titles (About, Gallery, Robots) */
+  line-height: 1.15;
+  margin-bottom: 0.5rem;
 }
-h2{
-    font-size: 2.5rem;
-    color: var(--text-color);
+
+h2 {
+  font-size: 2.5rem;    /* 40px - Major section headers inside pages */
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
 }
-h3{
-    font-size: 2rem;
-    color: var(--text-color);
+
+h3 {
+  font-size: 1.75rem;   /* 28px - Sub-sections, feature titles */
+  line-height: 1.3;
+  margin-bottom: 0.5rem;
 }
-h4{
-    font-size: 1.5rem;
-    color: var(--text-color);
+
+h4 {
+  font-size: 1.25rem;   /* 20px - Card titles, prominent labels */
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
 }
-h5{
-    font-size: 1.25rem;
-    color: var(--text-color);
+
+h5 {
+  font-size: 1.0rem;    /* 16px - Bold UI text */
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
 }
-h6{
-    font-size: 1rem;
-    color: var(--text-color);
+
+h6 {
+  font-size: 0.875rem;  /* 14px - Small uppercase category tags or eyebrows */
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
 }
 p, a, span, li{
     font-family: 'Carme', sans-serif;
