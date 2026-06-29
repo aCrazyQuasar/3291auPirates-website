@@ -1,8 +1,16 @@
-const express = require("express");
-const path = require("path");
+import express from "express";
+import prisma from "./db.js";
+import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = 3000;
+
+dotenv.config();
 
 // Allow JSON requests
 app.use(express.json());
@@ -10,6 +18,21 @@ app.use(express.json());
 // Serve everything inside /public
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/uploads", express.static("uploads"));
+
+await prisma.robot.create({
+    data: {
+        name: "Maroonosauros Rex",
+        year: 2025,
+        season: "FTC",
+        image: "/uploads/robots/pictures/2025-ftc-marooned.png",
+        description: "Our 2025 FTC robot.",
+        model: "/uploads/robots/models/2025-ftc-marooned.glb"
+    }
+});
+
+const robots = await prisma.robot.findMany();
+
+console.log(robots);
 
 app.get("/api/test", (req, res) => {
     res.json({
@@ -57,7 +80,7 @@ app.get("/api/robots/1", (req, res) => {
             description: "This robot features a flywheel launcher...",
             picture: "/uploads/robots/pictures/2025-ftc-marooned.png",
             github: "https://github.com/AuPiratesFIRST/FTC-2025-Decode-Team19594",
-            model: "/uploads/robots/2025-ftc-marooned.glb"
+            model: "/uploads/robots/models/2025-ftc-marooned.glb"
         }
     ]);
 });

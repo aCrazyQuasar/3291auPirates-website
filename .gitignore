@@ -1,0 +1,11 @@
+# Node
+node_modules/
+
+# Environment variables
+.env
+
+# Editor settings
+.vscode/
+/generated/prisma
+
+/generated/prisma
