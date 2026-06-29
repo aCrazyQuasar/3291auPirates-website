@@ -48,3 +48,19 @@ app.use("/admin", adminRoutes);
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
 });
+
+// 404 page
+app.use((req, res) => {
+    res.status(404).sendFile(
+        path.join(__dirname, "public/errors/404.html")
+    );
+});
+
+// 500 page
+app.use((err, req, res, next) => {
+    console.error(err);
+
+    res.status(500).sendFile(
+        path.join(__dirname, "public/errors/500.html")
+    );
+});
