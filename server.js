@@ -3,6 +3,12 @@ import prisma from "./db.js";
 import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
+import session from "express-session";
+import bcrypt from "bcrypt";
+
+// Routes
+import robotRoutes from "./routes/robots.js";
+import authRoutes from "./routes/auth.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -15,72 +21,32 @@ dotenv.config();
 // Allow JSON requests
 app.use(express.json());
 
-// Serve everything inside /public
+// Cookies yummy
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+
+    cookie: {
+        httpOnly: true,
+        secure: false, // true when using HTTPS in production
+        maxAge: 1000 * 60 * 60 * 24 // 1 day
+    }
+}));
+
+// Check admins or smt
+const admins = await prisma.admin.findMany();
+console.log(admins);
+
+// Serve everything inside /public and /uploads
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/uploads", express.static("uploads"));
 
-await prisma.robot.create({
-    data: {
-        name: "Maroonosauros Rex",
-        year: 2025,
-        season: "FTC",
-        image: "/uploads/robots/pictures/2025-ftc-marooned.png",
-        description: "Our 2025 FTC robot.",
-        model: "/uploads/robots/models/2025-ftc-marooned.glb"
-    }
-});
+// Serve Routes
+app.use("/api/robots", robotRoutes);
+app.use("/api/admin", authRoutes);
 
-const robots = await prisma.robot.findMany();
-
-console.log(robots);
-
-app.get("/api/test", (req, res) => {
-    res.json({
-        success: true,
-        message: "Backend works!"
-    });
-});
-
+// Smt
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
-});
-
-app.get("/api/robots", (req, res) => {
-    res.json([
-        {
-            id: 1,
-            name: "Maroonosauros Rex",
-            year: "2025-26",
-            season: "FTC",
-            picture: "/uploads/robots/pictures/2025-ftc-marooned.png"
-        },
-        {
-            id: 2,
-            name: "Pearls",
-            year: "2025-26",
-            season: "FTC",
-            picture: "/uploads/robots/pictures/2025-ftc-pearls.png"
-        },
-        {
-            id: 3,
-            name: "Rebuilt Robot",
-            year: "2025-26",
-            season: "FRC",
-            picture: "/uploads/robots/pictures/2026-frc-team3291.jpg"
-        }
-    ]);
-});
-app.get("/api/robots/1", (req, res) => {
-    res.json([
-        {
-            id: 1,
-            name: "Maroonosauros Rex",
-            year: "2025-26",
-            season: "FTC",
-            description: "This robot features a flywheel launcher...",
-            picture: "/uploads/robots/pictures/2025-ftc-marooned.png",
-            github: "https://github.com/AuPiratesFIRST/FTC-2025-Decode-Team19594",
-            model: "/uploads/robots/models/2025-ftc-marooned.glb"
-        }
-    ]);
 });
