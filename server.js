@@ -9,6 +9,7 @@ import bcrypt from "bcrypt";
 // Routes
 import robotRoutes from "./routes/robots.js";
 import authRoutes from "./routes/auth.js";
+import adminRoutes from "./routes/admin.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -34,10 +35,6 @@ app.use(session({
     }
 }));
 
-// Check admins or smt
-const admins = await prisma.admin.findMany();
-console.log(admins);
-
 // Serve everything inside /public and /uploads
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/uploads", express.static("uploads"));
@@ -45,6 +42,7 @@ app.use("/uploads", express.static("uploads"));
 // Serve Routes
 app.use("/api/robots", robotRoutes);
 app.use("/api/admin", authRoutes);
+app.use("/admin", adminRoutes);
 
 // Smt
 app.listen(PORT, () => {

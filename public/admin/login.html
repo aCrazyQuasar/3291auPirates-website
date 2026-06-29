@@ -1,9 +1,33 @@
-<form id="loginForm">
-    <input type="text" name="username" placeholder="Username">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login to Admin | Team 3291</title>
 
-    <input type="password" name="password" placeholder="Password">
+    <!-- CSS Imports -->
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="./css/login.css">
+</head>
+<body>
+    <main>
+        <img src="../assets/images/2026/2026-comp-robot-on-field.jpg" alt="Background Image" class="background-image">
+    </main>
+    <div class="card">
+        <h2>Login to Team 3291's Website</h2>
+        <p>If you are not an authorized member of the 3291 team, please return to the homepage <a href="../index.html">here</a>.</p>
+        <form id="loginForm">
+            <input type="text" name="username" placeholder="Username">
+            <input type="password" name="password" placeholder="Password">
+            <button class="disabled">
+                <span id="spinner" class="spinner hidden"></span>
+                Login
+            </button>
+        </form>
+        <span id="output-text">Please enter your username or password above.</span>
+    </div>
+</body>
+</html>
 
-    <button>Login</button>
-</form>
 
 <script src="./js/login.js"></script>
