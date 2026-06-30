@@ -1,0 +1,33 @@
+#bg{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -5;
+}
+.bouncy{
+    display: flex;
+    justify-content: space-evenly;
+    width:fit-content;
+    font-size: min(8rem, 50vw);
+}
+.bouncy span{
+    font-family: inherit;
+    animation: jump-and-spin 3s ease infinite;
+    animation-delay: calc(sibling-index() * 200ms);
+}
+@keyframes jump-and-spin{
+    0%{
+        transform: translateY(0) rotateY(0);
+    }
+    50%{
+        transform: translateY(-25px) rotateY(180deg);
+    }
+    100%{
+        transform: translateY(0) rotateY(360deg);
+    }
+}
+h1, p, a, span{
+    color: var(--inverse-text-color);
+}
