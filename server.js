@@ -52,14 +52,14 @@ app.listen(PORT, () => {
 // 401 page
 app.get("/401", (req, res) => {
     res.status(401).sendFile(
-        path.join(__dirname, "public/errors/401.html")
+        path.join(__dirname, "views/errors/401.html")
     );
 });
 
 // 404 page
 app.use((req, res) => {
     res.status(404).sendFile(
-        path.join(__dirname, "public/errors/404.html")
+        path.join(__dirname, "views/errors/404.html")
     );
 });
 
@@ -67,6 +67,6 @@ app.use((req, res) => {
 app.use((err, req, res, next) => {
     console.error(err);
     res.status(500).sendFile(
-        path.join(__dirname, "public/errors/500.html")
+        path.join(__dirname, "views/errors/500.html")
     );
 });
