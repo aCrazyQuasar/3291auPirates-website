@@ -6,28 +6,83 @@
     bottom: 0;
     z-index: -5;
 }
-.bouncy{
+.big{
     display: flex;
-    justify-content: space-evenly;
-    width:fit-content;
+    justify-content: center;
+    gap: 1rem;
+    width: fit-content;
     font-size: min(8rem, 50vw);
-}
-.bouncy span{
-    font-family: inherit;
-    animation: jump-and-spin 3s ease infinite;
-    animation-delay: calc(sibling-index() * 200ms);
-}
-@keyframes jump-and-spin{
-    0%{
-        transform: translateY(0) rotateY(0);
-    }
-    50%{
-        transform: translateY(-25px) rotateY(180deg);
-    }
-    100%{
-        transform: translateY(0) rotateY(360deg);
-    }
 }
 h1, p, a, span{
     color: var(--inverse-text-color);
+}
+.upper-text{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+}
+.logs{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+}
+.log{
+    background-image: url('/assets/images/log.png');
+    background-size: cover;
+    background-position: center;
+    width: 300px;
+    height: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+    animation: 
+        float 5s ease-in-out infinite calc(calc(sibling-index() - 1) * -3020ms),
+        bob 4s ease-in-out infinite calc(calc(sibling-index() - 1) * -500ms);
+}
+@keyframes float {
+    0%, 100% {
+        translate: 0 0; /* Uses individual translate property */
+    }
+    25% {
+        translate: 0 -30px;
+    }
+    75% {
+        translate: 0 30px;
+    }
+}
+@keyframes bob {
+    0%, 100% {
+        rotate: 5deg; /* Uses individual rotate property */
+    }
+    50% {
+        rotate: -5deg;
+    }
+}
+.log:hover{
+    animation-play-state: paused;
+    scale: 1.1;
+}
+.log:active{
+    scale: 0.9;
+}
+.log span{
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-shadow: 0 0 10px var(--shadow-color);
 }

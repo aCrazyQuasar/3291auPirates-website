@@ -10,6 +10,7 @@ import bcrypt from "bcrypt";
 import robotRoutes from "./routes/robots.js";
 import authRoutes from "./routes/auth.js";
 import adminRoutes from "./routes/admin.js";
+import pageRoutes from "./routes/pages.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -43,6 +44,7 @@ app.use("/uploads", express.static("uploads"));
 app.use("/api/robots", robotRoutes);
 app.use("/api/admin", authRoutes);
 app.use("/admin", adminRoutes);
+app.use("/", pageRoutes);
 
 // Smt
 app.listen(PORT, () => {
