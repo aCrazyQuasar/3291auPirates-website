@@ -36,6 +36,7 @@ header .logo-bg{
     border-radius: 20px;
     box-shadow: 0 0 20px #00000080;
     cursor: pointer;
+    border: none;
     transition: 0.3s ease;
 }
 .card:hover{
@@ -66,3 +67,38 @@ header .logo-bg{
 .card.ftc{background-color: var(--first-orange);}
 .card.frc{background-color: var(--first-blue);}
 .card.hidden{display: none;}
+
+body:has(:popover-open) * {
+    pointer-events: none;
+}
+[popover]:popover-open,
+[popover]:popover-open * {
+    pointer-events: auto !important;
+}
+[popover] {
+    pointer-events: auto;
+}
+[popover]::backdrop {
+    background-color: var(--overlay-color);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: auto !important; 
+}
+[popover]:not(:popover-open) {
+    display: none !important;
+}
+[popover]:popover-open {
+    display: flex;
+    position: fixed;
+    inset: 0;
+    width: max-content;
+    height: max-content;
+    margin: auto;
+    border: none;
+    border-radius: 8px;
+    padding: 20px;
+    z-index: 100;
+}

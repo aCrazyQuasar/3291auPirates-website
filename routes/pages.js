@@ -9,5 +9,17 @@ const router = express.Router();
 router.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "../views/index.html"));
 });
+router.get("/robots", (req, res) => {
+    res.sendFile(path.join(__dirname, "../views/pages/robots.html"));
+});
+router.get("/404", (req, res) => {
+    res.sendFile(path.join(__dirname, "../views/errors/404.html"));
+});
+router.get("/401", (req, res) => {
+    res.sendFile(path.join(__dirname, "../views/errors/401.html"));
+});
+router.get("/500", (req, res) => {
+    res.sendFile(path.join(__dirname, "../views/errors/500.html"));
+});
 
 export default router;

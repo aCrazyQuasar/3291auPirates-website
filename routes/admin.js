@@ -10,11 +10,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 router.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "../public/admin/index.html"));
+    res.sendFile(path.join(__dirname, "../views/admin/login.html"));
 });
 
 router.get("/dashboard", requireLoginPage, (req, res) => {
-    res.sendFile(path.join(__dirname, "../public/admin/dashboard.html"));
+    res.sendFile(path.join(__dirname, "../views/admin/dashboard.html"));
 });
 
 export default router;
