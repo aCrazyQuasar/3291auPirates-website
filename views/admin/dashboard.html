@@ -12,29 +12,47 @@
 <body>
     <h1>Admin Dashboard</h1>
     
-    <div id="robot-container">
+    <dialogue id="addRobotModal">
+        <form id="robotForm">
+            <input type="text" id="name" placeholder="Robot Name" required /><br />
+            <input type="number" id="year" placeholder="Year" required /><br />
+            <input type="text" id="season" placeholder="Season (e.g., Crescendo)" required /><br />
+            <textarea id="description" placeholder="Description" required></textarea><br />
+            <input type="url" id="githubLink" placeholder="GitHub URL" /><br />
 
+            <hr />
+            
+            <label>Robot Image (.png):</label>
+            <input type="file" id="imageFile" accept=".png" required /><br />
+
+            <label>3D Model (.glb):</label>
+            <input type="file" id="modelFile" accept=".glb" required /><br />
+            
+            <hr />
+
+            <button type="submit" id="submitBtn">Save Robot Display</button>
+        </form>
+    </dialogue>
+
+    <div class="robot-display">
+        <div class="control-bar">
+            <p>Number of Robots: <span id="robotCount">0</span></p>
+            <input type="text" id="searchInput" placeholder="Search Robots..." />
+            <div class="btns">
+                <button id="addRobotBtn" class="btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
+                    Add New Robot
+                </button>
+                <button id="robotRefreshBtn" class="btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-160q-134 0-227-93t-93-227q0-134 93-227t227-93q69 0 132 28.5T720-690v-110h80v280H520v-80h168q-32-56-87.5-88T480-720q-100 0-170 70t-70 170q0 100 70 170t170 70q77 0 139-44t87-116h84q-28 106-114 173t-196 67Z"/></svg>
+                    Refresh Robots
+                </button>
+            </div>
+        </div>
+        <div id="robot-container"></div>
     </div>
 
-    <form id="robotForm">
-        <input type="text" id="name" placeholder="Robot Name" required /><br />
-        <input type="number" id="year" placeholder="Year" required /><br />
-        <input type="text" id="season" placeholder="Season (e.g., Crescendo)" required /><br />
-        <textarea id="description" placeholder="Description" required></textarea><br />
-        <input type="url" id="githubLink" placeholder="GitHub URL" /><br />
-
-        <hr />
-        
-        <label>Robot Image (.png):</label>
-        <input type="file" id="imageFile" accept=".png" required /><br />
-
-        <label>3D Model (.glb):</label>
-        <input type="file" id="modelFile" accept=".glb" required /><br />
-        
-        <hr />
-
-        <button type="submit" id="submitBtn">Save Robot Display</button>
-    </form>
+    
     <script type="module" src="/js/admin/dashboard/uploads.js"></script>
     <script type="module" src="/js/admin/dashboard/robots.js"></script>
 </body>
