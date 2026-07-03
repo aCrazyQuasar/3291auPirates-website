@@ -4,8 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | Team 3291</title>
+
+    <!-- CSS Imports -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/admin/dashboard/robots.css">
 </head>
 <body>
+    <h1>Admin Dashboard</h1>
+    
+    <div id="robot-container">
+
+    </div>
+
     <form id="robotForm">
         <input type="text" id="name" placeholder="Robot Name" required /><br />
         <input type="number" id="year" placeholder="Year" required /><br />
@@ -25,6 +35,7 @@
 
         <button type="submit" id="submitBtn">Save Robot Display</button>
     </form>
-    <script type="module" src="/admin/js/dashboardUploads.js"></script>
+    <script type="module" src="/js/admin/dashboard/uploads.js"></script>
+    <script type="module" src="/js/admin/dashboard/robots.js"></script>
 </body>
 </html>
