@@ -6,6 +6,24 @@
     <title>Dashboard | Team 3291</title>
 </head>
 <body>
-    
+    <form id="robotForm">
+        <input type="text" id="name" placeholder="Robot Name" required /><br />
+        <input type="number" id="year" placeholder="Year" required /><br />
+        <input type="text" id="season" placeholder="Season (e.g., Crescendo)" required /><br />
+        <textarea id="description" placeholder="Description" required></textarea><br />
+        <input type="url" id="githubLink" placeholder="GitHub URL" /><br />
+
+        <hr />
+        
+        <label>Robot Image (.png):</label>
+        <input type="file" id="imageFile" accept=".png" required /><br />
+
+        <label>3D Model (.glb):</label>
+        <input type="file" id="modelFile" accept=".glb" required /><br />
+        
+        <hr />
+
+        <button type="submit" id="submitBtn">Save Robot Display</button>
+    </form>
 </body>
 </html>
