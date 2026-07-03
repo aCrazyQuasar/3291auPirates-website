@@ -18,10 +18,16 @@ model Robot {
   name        String
   year        Int
   season      String
-  image       String
   description String
-  model       String
   githubLink  String @default("https://github.com/AuPiratesFIRST")
+  
+  // Storage for the Image (.png)
+  image       String // Stores the UploadThing CDN URL for displaying the image
+  imageKey    String // Stores the unique UploadThing key needed for deletion
+
+  // Storage for the 3D Model (.glb)
+  model       String // Stores the UploadThing CDN URL for loading the 3D asset
+  modelKey    String // Stores the unique UploadThing key needed for deletion
 }
 
 model Admin {
