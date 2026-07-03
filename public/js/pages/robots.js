@@ -20,7 +20,7 @@ async function createRobotCards() {
         const cls = season.toLowerCase();
         const card = `
             <button class="card ${cls}" popovertarget="${robot.id}-popover">
-                <img src="${robot.picture}" alt="Robot Picture">
+                <img src="${robot.image}" alt="${robot.name} Picture">
                 <div class="text-box">
                     <h3>${robot.name}</h3>
                     <p>${robot.year} | ${robot.season}</p>

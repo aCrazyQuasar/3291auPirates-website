@@ -1,76 +1,57 @@
-// app.js
-import { genUploader } from "uploadthing/client";
-
-// 1. Initialize the UploadThing client helper pointing to your Express backend route
-const uploadFiles = genUploader({
-  url: "http://localhost:3000/api/uploadthing",
-});
+// dashboardUploads.js
 
 const form = document.getElementById("robotForm");
 const submitBtn = document.getElementById("submitBtn");
 
 form.addEventListener("submit", async (event) => {
-  event.preventDefault(); // Stop normal form reload
+  event.preventDefault(); // Stop standard page reload
   
   submitBtn.disabled = true;
-  submitBtn.innerText = "Uploading files to cloud...";
+  submitBtn.innerText = "Uploading files and saving robot entry...";
 
-  // Get files from the DOM
   const imageFileInput = document.getElementById("imageFile");
   const modelFileInput = document.getElementById("modelFile");
 
   const imageFile = imageFileInput.files[0];
   const modelFile = modelFileInput.files[0];
 
+  if (!imageFile || !modelFile) {
+    alert("Please select both a .png image and a .glb 3D model.");
+    submitBtn.disabled = false;
+    submitBtn.innerText = "Save Robot Display";
+    return;
+  }
+
   try {
-    // 2. Upload the files to UploadThing
-    // 'robotAssetUploader' matches the exact configuration key on your backend!
-    const uploadResponse = await uploadFiles("robotAssetUploader", {
-      files: [imageFile, modelFile],
-    });
+    // Pack EVERYTHING into a single modern multipart form body
+    const formData = new FormData();
+    formData.append("name", document.getElementById("name").value);
+    formData.append("year", document.getElementById("year").value);
+    formData.append("season", document.getElementById("season").value);
+    formData.append("description", document.getElementById("description").value);
+    formData.append("githubLink", document.getElementById("githubLink").value || "");
+    
+    // Append the raw files
+    formData.append("imageFile", imageFile);
+    formData.append("modelFile", modelFile);
 
-    console.log("Cloud Upload response:", uploadResponse);
-
-    // Find which returned item is the image and which is the 3D model
-    const imgData = uploadResponse.find(f => f.name.endsWith('.png'));
-    const glbData = uploadResponse.find(f => f.name.endsWith('.glb'));
-
-    submitBtn.innerText = "Saving robot details to database...";
-
-    // 3. Prepare the final payload for your Express/Prisma route
-    const robotData = {
-      name: document.getElementById("name").value,
-      year: document.getElementById("year").value,
-      season: document.getElementById("season").value,
-      description: document.getElementById("description").value,
-      githubLink: document.getElementById("githubLink").value || undefined,
-      // Map data directly to match what your req.body expects in Express
-      image: imgData.url,
-      imageKey: imgData.key,
-      model: glbData.url,
-      modelKey: glbData.key
-    };
-
-    // 4. Send everything to your /api/robots endpoint
-    const response = await fetch("http://localhost:3000/api/robots", {
+    // Send the multipart payload to your backend route
+    const dbResponse = await fetch("http://localhost:3000/api/robots", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(robotData),
+      body: formData // Note: DO NOT set Content-Type header manually, the browser handles it automatically for FormData!
     });
 
-    if (response.ok) {
-      alert("Robot successfully added to the database!");
+    if (dbResponse.ok) {
+      alert("🎉 Robot successfully uploaded and written to database!");
       form.reset();
     } else {
-      const errData = await response.json();
-      alert(`Database error: ${errData.error}`);
+      const errData = await dbResponse.json();
+      alert(`Upload failed: ${errData.error}`);
     }
 
   } catch (error) {
     console.error(error);
-    alert("An error occurred during file upload or database save.");
+    alert(`Error: ${error.message}`);
   } finally {
     submitBtn.disabled = false;
     submitBtn.innerText = "Save Robot Display";

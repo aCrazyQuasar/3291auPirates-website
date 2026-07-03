@@ -37,6 +37,7 @@ header .logo-bg{
     box-shadow: 0 0 20px #00000080;
     cursor: pointer;
     border: none;
+    position: relative;
     transition: 0.3s ease;
 }
 .card:hover{
@@ -46,15 +47,24 @@ header .logo-bg{
     filter: brightness(1);
 }
 .card img{
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 20%;
     width: 100%;
     height: 80%;
-    object-fit: cover;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     filter: brightness(0.5);
     transition: 0.3s ease;;
 }
 .card .text-box{
+    position: absolute;
+    bottom: 0;
+    transform: translateY(-25%);
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;

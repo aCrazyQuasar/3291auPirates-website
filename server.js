@@ -5,8 +5,10 @@ import path from "path";
 import { fileURLToPath } from "url";
 import session from "express-session";
 import bcrypt from "bcrypt";
+import { createRouteHandler } from "uploadthing/express";
 
 // Routes
+import { uploadRouter } from "./uploadthing.js";
 import robotRoutes from "./routes/robots.js";
 import authRoutes from "./routes/auth.js";
 import adminRoutes from "./routes/admin.js";
@@ -39,6 +41,14 @@ app.use(session({
 // Serve everything inside /public and /uploads
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/uploads", express.static("uploads"));
+
+// uploadthing
+app.use(
+  "/api/uploadthing",
+  createRouteHandler({
+    router: uploadRouter,
+  })
+);
 
 // Serve Routes
 app.use("/api/robots", robotRoutes);
