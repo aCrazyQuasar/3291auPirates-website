@@ -26,20 +26,17 @@ async function createRobotCards() {
                     <p>${robot.year} | ${robot.season}</p>
                 </div>
             </button>
-            <div class="card" id="${robot.id}-popover" popover>
-                <div class="card-info">
-                    <h1 class="card-title">${robot.name}</h1>
-                    <p class="card-description">
-                        Explore this high-fidelity 3D asset directly inside your browser. Drag to orbit around the character, scroll to zoom, or watch it spin automatically. Source files and updates are available on GitHub.
-                    </p>
-                    <a href="#" target="_blank" class="github-btn">
+            <div id="${robot.id}-popover" popover>
+                <div class="info">
+                    <h1 class="title">${robot.name}</h1>
+                    <p class="description">${robot.description}</p>
+                    <a href="${robot.githubLink}" target="_blank" class="github-btn">
                         View on GitHub
                     </a>
                 </div>
-
-                <div class="card-viewer">
+                <div class="viewer">
                     <model-viewer 
-                        src="/uploads/robots/models/2025-ftc-marooned.glb" 
+                        src="${robot.model}" 
                         alt="${robot.name} Interactive 3D Model" 
                         camera-controls 
                         auto-rotate 

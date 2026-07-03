@@ -59,6 +59,7 @@ header .logo-bg{
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    color: var(--text-color);
     gap: 0.5rem;
 } 
 .card .text-box p{
@@ -91,14 +92,72 @@ body:has(:popover-open) * {
     display: none !important;
 }
 [popover]:popover-open {
-    display: flex;
     position: fixed;
-    inset: 0;
-    width: max-content;
-    height: max-content;
-    margin: auto;
-    border: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: row;
+    width: 850px;
+    max-width: 90%;
+    height: 450px;
+    background-color: #1e1e1e;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid #2d2d2d;
+}
+[popover] .info{
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+[popover] .title {
+    font-size: 2rem;
+    margin: 0 0 10px 0;
+    font-weight: 700;
+    color: var(--text-color);
+}
+[popover] .github-btn{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    padding: 12px 24px;
+    background-color: #2f363d;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
     border-radius: 8px;
-    padding: 20px;
-    z-index: 100;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+[popover] .github-btn:hover {
+    background-color: #444d56;
+}
+[popover] .github-btn:active {
+    transform: scale(0.98);
+}
+[popover] .viewer {
+    flex: 1;
+    background-color: #181818;
+    position: relative;
+}
+[popover] model-viewer {
+    width: 100%;
+    height: 100%;
+    --poster-color: transparent;
+}
+@media (max-width: 768px) {
+    [popover]:popover-open {
+        flex-direction: column-reverse; /* Puts model on top for mobile */
+        height: auto;
+        max-width: 400px;
+    }
+    [popover] .viewer {
+        height: 300px;
+    }
+    [popover] .info {
+        padding: 24px;
+    }
 }

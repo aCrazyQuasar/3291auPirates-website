@@ -21,6 +21,7 @@ model Robot {
   image       String
   description String
   model       String
+  githubLink  String @default("https://github.com/AuPiratesFIRST")
 }
 
 model Admin {
