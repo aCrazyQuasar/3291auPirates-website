@@ -18,7 +18,7 @@ form.addEventListener("submit", async (event) => {
   if (!imageFile || !modelFile) {
     alert("Please select both a .png image and a .glb 3D model.");
     submitBtn.disabled = false;
-    submitBtn.innerText = "Save Robot Display";
+    submitBtn.innerText = "Save Robot";
     return;
   }
 
@@ -27,7 +27,11 @@ form.addEventListener("submit", async (event) => {
     const formData = new FormData();
     formData.append("name", document.getElementById("name").value);
     formData.append("year", document.getElementById("year").value);
-    formData.append("season", document.getElementById("season").value);
+    
+    // FIX: Target the checked radio button within the "season" group
+    const selectedSeason = document.querySelector('input[name="season"]:checked');
+    formData.append("season", selectedSeason ? selectedSeason.value : "");
+    
     formData.append("description", document.getElementById("description").value);
     formData.append("githubLink", document.getElementById("githubLink").value || "");
     
@@ -54,6 +58,6 @@ form.addEventListener("submit", async (event) => {
     alert(`Error: ${error.message}`);
   } finally {
     submitBtn.disabled = false;
-    submitBtn.innerText = "Save Robot Display";
+    submitBtn.innerText = "Save Robot";
   }
 });

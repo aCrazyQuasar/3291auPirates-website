@@ -8,15 +8,15 @@
     box-sizing: border-box;
 }
 .control-bar{
-    width: min(90%, 1200px);
-    margin: 0 auto;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    background-color: var(--surface-light);
+    justify-content: space-between; 
+    align-items: center;            
+    width: 100%;
+    padding: 16px 24px;
+    border: 1px solid var(--surface-lighter);
     border-radius: 20px;
-    height: fit-content;
+    font-size: 1.05rem;
+    box-sizing: border-box;
 }
 .control-bar .btns{
     display: flex;
@@ -25,12 +25,8 @@
     gap: 1rem;
 }
 .control-bar .btns .btn{
-    background-color: var(--brand-color);
     color: var(--text-color);
-    border: none;
-    box-shadow: 0 0 20px var(--shadow-color);
     cursor: pointer;
-    transition: 0.3s ease;
     padding: 0.75rem 1.5rem;
     font-size: 1.05rem;
     border-radius: 15px;
@@ -38,16 +34,17 @@
     justify-content: space-evenly;
     align-items: center;
     gap: 0.5rem;
+    transition: 0.3s ease;
 }
 .control-bar .btns .btn:hover{
-    transform: translateY(-5px);
+    scale: 1.02;
 }
 .control-bar .btns .btn:active{
-    transform: translateY(0px);
+    scale: 0.98;
 }
 .control-bar .btns .btn svg{
-    width: 24px;
-    height: 24px;
+    width: 1.05rem;
+    height: 1.05rem;
     fill: var(--text-color);
 }
 .control-bar .btns .btn:disabled{
@@ -57,19 +54,21 @@
     cursor: not-allowed;
 }
 .control-bar .btns #addRobotBtn{
-    background-color: var(--success-dark);
+    background-color: var(--success-bg);
+    border: 1px solid var(--success-bg)
 }
 .control-bar .btns #robotRefreshBtn{
-    background-color: var(--info-dark);
+    background-color: var(--info-bg);
+    border: 1px solid var(--info-bg);
 }
 .control-bar input[type="text"]{
-    background-color: var(--surface-lighter);
+    width: 300px;
+    background-color: var(--surface-light);
     color: var(--text-color);
-    border: 2px solid var(--brand-color);
+    border: 1px solid var(--surface-lighter);
     padding: 0.75rem 1.5rem;
     font-size: 1.05rem;
     border-radius: 15px;
-    box-shadow: 0 0 20px var(--shadow-color);
 }
 input:focus{
     outline: none;
@@ -271,4 +270,215 @@ body:has(:popover-open) * {
     .robot-popover .info {
         padding: 24px;
     }
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+#addRobotModal{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: fit-content;
+    height: fit-content;
+    background-color: transparent;
+    border: none;
+}
+#addRobotModal::backdrop{
+    background-color: var(--overlay-color);
+}
+#robotForm {
+    background-color: var(--surface-color);
+    border: 1px solid var(--surface-lighter);
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 850px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+#robotForm .inputs {
+    display: flex;
+    gap: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+/* --- Left Side: Text Inputs --- */
+#robotForm .text-inputs {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+#robotForm .text-inputs input[type="text"],
+#robotForm .text-inputs input[type="number"],
+#robotForm .text-inputs input[type="url"],
+#robotForm .text-inputs textarea {
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--surface-lighter);
+    border-radius: 6px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background-color: var(--surface-light);
+    caret-color: var(--text-color);
+}
+
+#robotForm .text-inputs input:focus,
+#robotForm .text-inputs textarea:focus {
+    outline: none;
+    border-color: var(--brand-color);
+    box-shadow: 0 0 3px var(--brand-color);
+}
+
+#robotForm .text-inputs textarea {
+    min-height: 120px;
+    resize: none;
+}
+
+/* --- Radio Toggle (FRC / FTC) --- */
+#robotForm .league-toggle {
+    display: flex;
+    border: 1px solid var(--surface-lighter);
+    border-radius: 6px;
+    overflow: hidden;
+    width: 100%;
+}
+
+#robotForm .text-inputs input[type="radio"] {
+    display: none;
+}
+
+#robotForm .league-toggle label {
+    flex: 1;
+    text-align: center;
+    padding: 0.75rem;
+    cursor: pointer;
+    background: var(--surface-light);
+    color: var(--text-color);
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+#robotForm .text-inputs input[type="radio"]:checked + label {
+    background-color: var(--brand-color);
+    color: var(--text-color);
+}
+
+/* --- Right Side: File Upload Drop Zones --- */
+#robotForm .file-inputs {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+#robotForm .field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+#robotForm .field-label {
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 0.9rem;
+}
+
+/* --- Integrated Drop Zone Style --- */
+#robotForm .drop-zone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 125px;
+    border: 2px dashed var(--surface-lighter);
+    border-radius: 8px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.3s, border-color 0.3s;
+    box-sizing: border-box;
+    background-color: var(--surface-light);
+}
+
+#robotForm .drop-zone:hover {
+    background-color: var(--surface-light);
+    border-color: var(--brand-color);
+}
+
+#robotForm .drop-zone input[type="file"] {
+    display: none;
+}
+
+#robotForm .drop-zone-text {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    text-align: center;
+    padding: 0 1rem;
+    z-index: 2;
+    mix-blend-mode: difference;
+}
+
+#robotForm .preview-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    filter: saturate(0.5) brightness(0.7);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* --- Action Buttons --- */
+#robotForm .btns {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    border-top: 1px solid var(--surface-lighter);
+    padding-top: 1.5rem;
+}
+
+#robotForm button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#robotForm #submitBtn {
+    background-color: var(--brand-color);
+    color: var(--inverse-text-color);
+    border: none;
+}
+
+#robotForm #submitBtn:hover {
+    background-color: var(--brand-color);
+}
+
+#robotForm #closeRobotModalBtn {
+    background-color: transparent;
+    color: var(--text-color);
+    border: 1px solid var(--surface-lighter);
+}
+
+#robotForm #closeRobotModalBtn:hover {
+    background-color: var(--surface-light);
 }

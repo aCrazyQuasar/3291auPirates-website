@@ -12,27 +12,51 @@
 <body>
     <h1>Admin Dashboard</h1>
     
-    <dialogue id="addRobotModal">
+    <dialog id="addRobotModal">
         <form id="robotForm">
-            <input type="text" id="name" placeholder="Robot Name" required /><br />
-            <input type="number" id="year" placeholder="Year" required /><br />
-            <input type="text" id="season" placeholder="Season (e.g., Crescendo)" required /><br />
-            <textarea id="description" placeholder="Description" required></textarea><br />
-            <input type="url" id="githubLink" placeholder="GitHub URL" /><br />
+            <div class="inputs">
+                <div class="text-inputs">
+                    <input type="text" id="name" placeholder="Robot Name" required>
+                    <input type="number" id="year" placeholder="Year" required>
 
-            <hr />
-            
-            <label>Robot Image (.png):</label>
-            <input type="file" id="imageFile" accept=".png" required /><br />
+                    <div class="league-toggle">
+                        <input type="radio" id="frc" name="season" value="FRC" checked>
+                        <label for="frc">FRC</label>
 
-            <label>3D Model (.glb):</label>
-            <input type="file" id="modelFile" accept=".glb" required /><br />
-            
-            <hr />
+                        <input type="radio" id="ftc" name="season" value="FTC">
+                        <label for="ftc">FTC</label>
+                    </div>
 
-            <button type="submit" id="submitBtn">Save Robot Display</button>
+                    <textarea id="description" placeholder="Description" required></textarea>
+                    <input type="url" id="githubLink" placeholder="GitHub URL">
+                </div>
+
+                <div class="file-inputs">
+                    <div class="field-group">
+                        <span class="field-label">Robot Image (.png)</span>
+                        <label for="imageFile" class="drop-zone" id="imageDropZone">
+                            <input type="file" id="imageFile" accept=".png" required />
+                            <span class="drop-zone-text">Drop image here or click to upload</span>
+                            <div class="preview-img"></div>
+                        </label>
+                    </div>
+
+                    <div class="field-group">
+                        <span class="field-label">3D Model (.glb)</span>
+                        <label for="modelFile" class="drop-zone" id="modelDropZone">
+                            <input type="file" id="modelFile" accept=".glb" required />
+                            <span class="drop-zone-text">Drop 3D model here or click to upload</span>
+                            <div class="preview-img"></div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="btns">
+                <button type="submit" id="submitBtn">Save Robot</button>
+                <button type="button" id="closeRobotModalBtn">Cancel</button>
+            </div>
         </form>
-    </dialogue>
+    </dialog>
 
     <div class="robot-display">
         <div class="control-bar">

@@ -4,6 +4,7 @@ let robotCards;
 
 async function generateRobotCards() {
     robotsContainer.innerHTML = '';
+    numberOfRobots = 0;
     await createRobotCards();
     document.getElementById('robotCount').textContent = numberOfRobots;
     robotCards = document.getElementById('robot-container').querySelectorAll('.robot-card');
@@ -75,5 +76,48 @@ searchInput.addEventListener('input', (e) => {
 generateRobotCards();
 
 // Buttons
-const refreshBtn = document.getElementById('robotRefreshBtn');
-refreshBtn.addEventListener('click', generateRobotCards);
+const robotRefreshBtn = document.getElementById('robotRefreshBtn');
+robotRefreshBtn.addEventListener('click', () => {
+    robotRefreshBtn.disabled = true;
+    generateRobotCards();
+    robotRefreshBtn.disabled = false;
+});
+const addRobotBtn = document.getElementById('addRobotBtn');
+const addRobotModal = document.getElementById('addRobotModal');
+const closeRobotModal = document.getElementById('closeRobotModalBtn')
+addRobotBtn.addEventListener("click", () => {
+    addRobotModal.showModal();
+});
+closeRobotModal.addEventListener("click", () => {
+    addRobotModal.close();
+});
+
+// --- Image Drop Zone Elements ---
+const imageFile = document.getElementById('imageFile');
+const imageDropZoneText = document.querySelector('#imageDropZone .drop-zone-text');
+const imagePreview = document.querySelector('#imageDropZone .preview-img');
+
+imageFile.addEventListener('change', () => {
+    if (imageFile.files.length > 0) {
+        const file = imageFile.files[0];
+        imageDropZoneText.textContent = file.name;
+        
+        // Read and display image background preview
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            imagePreview.style.backgroundImage = `url(${e.target.result})`;
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
+// --- Model Drop Zone Elements ---
+const modelFile = document.getElementById('modelFile');
+const modelDropZoneText = document.querySelector('#modelDropZone .drop-zone-text');
+
+modelFile.addEventListener('change', () => {
+    if (modelFile.files.length > 0) {
+        // Update text to show the selected .glb file name
+        modelDropZoneText.textContent = modelFile.files[0].name;
+    }
+});
