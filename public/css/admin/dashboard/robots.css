@@ -276,8 +276,6 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-
-/* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
 }
@@ -331,6 +329,7 @@ input[type=number] {
     transition: border-color 0.2s, box-shadow 0.2s;
     background-color: var(--surface-light);
     caret-color: var(--text-color);
+    color: var(--text-color);
 }
 
 #robotForm .text-inputs input:focus,
