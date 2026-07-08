@@ -36,23 +36,31 @@ async function createRobotCards() {
                 </div>
             </div>
             <div class="robot-popover" id="${robot.id}-robot-popover" popover>
-                <div class="info">
-                    <h1 class="title">${robot.name}</h1>
-                    <p class="description">${robot.description}</p>
-                    <a href="${robot.githubLink}" target="_blank" class="github-btn">
-                        View on GitHub
-                    </a>
-                </div>
-                <div class="viewer">
-                    <model-viewer 
-                        src="${robot.model}" 
-                        alt="${robot.name} Interactive 3D Model" 
-                        camera-controls 
-                        auto-rotate 
-                        shadow-intensity="1.5"
-                        interaction-prompt="none">
-                    </model-viewer>
-                </div>
+                <form class="edit-robot-form" data-robot-id="${robot.id}">
+                    <div class="info">
+                        <h1 class="title">Edit Robot</h1>
+                        
+                        <div class="form-group">
+                            <label for="edit-name-${robot.id}">Robot Name</label>
+                            <input type="text" id="edit-name-${robot.id}" class="edit-name" value="${robot.name}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="edit-desc-${robot.id}">Description</label>
+                            <textarea id="edit-desc-${robot.id}" class="edit-description" required>${robot.description}</textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="edit-github-${robot.id}">GitHub URL</label>
+                            <input type="url" id="edit-github-${robot.id}" class="edit-githubLink" value="${robot.githubLink || ''}">
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="save-edit-btn">Save Changes</button>
+                            <button type="button" popovertarget="${robot.id}-robot-popover" popovertargetaction="hide" class="cancel-edit-btn">Cancel</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         `;
         robotsContainer.innerHTML += card;

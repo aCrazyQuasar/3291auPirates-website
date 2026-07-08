@@ -48,6 +48,24 @@ form.addEventListener("submit", async (event) => {
     if (dbResponse.ok) {
       alert("🎉 Robot successfully uploaded and written to database!");
       form.reset();
+      document.querySelectorAll(".drop-zone").forEach(dropZone => {
+        // Reset the helper text back to original
+        const textSpan = dropZone.querySelector(".drop-zone-text");
+        if (textSpan) {
+          if (dropZone.id === "imageDropZone") {
+            textSpan.innerText = "Drop image here or click to upload";
+          } else if (dropZone.id === "modelDropZone") {
+            textSpan.innerText = "Drop 3D model here or click to upload";
+          }
+        }
+
+        // Clear out any image or thumbnail preview divs
+        const preview = dropZone.querySelector(".preview-img");
+        if (preview) {
+          preview.innerHTML = ""; 
+          preview.style.backgroundImage = "none"; // Clears it if you set it as a background image
+        }
+      });
     } else {
       const errData = await dbResponse.json();
       alert(`Upload failed: ${errData.error}`);

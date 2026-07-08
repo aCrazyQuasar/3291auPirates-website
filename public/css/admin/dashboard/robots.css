@@ -78,6 +78,7 @@ input:focus{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: row-reverse;
     flex-wrap: wrap;
     box-sizing: border-box;
     gap: 2rem;
@@ -208,7 +209,7 @@ body:has(:popover-open) * {
     transform: translate(-50%, -50%);
     display: flex;
     flex-direction: row;
-    width: 850px;
+    width: fit-content;
     max-width: 90%;
     height: 450px;
     background-color: #1e1e1e;
