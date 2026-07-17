@@ -1,22 +1,51 @@
-html{
-    scroll-behavior: smooth;
-}
-header{
+.control-bar{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
-    padding: 1rem 0;
+    padding: 1rem 2rem;
+    background-color: var(--surface-color);
+    width: min(800px, 90%);
+    margin: auto;
+    margin-top: 2rem;
+    border-radius: 15px;
+    font-size: 1.05rem;
 }
-header .logo{
-    max-width: 25vw;
+.control-bar p, .control-bar span {
+    color: var(--text-muted);
 }
-header .logo-bg{
-    background-color: var(--surface-light);
-    width: 25vw;
-    border-radius: 20px;
-    box-shadow: 0 0 20px #00000080;
-    border: none;
+.control-bar input[type="text"]{
+    background-color: var(--surface-color);
+    border: 2px solid var(--surface-lighter);
+    font-size: 1.05rem;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    color: var(--text-color);
+    transition: 300ms ease;
+}
+.control-bar input[type=text]:focus{
+    outline: none;
+    border: 2px solid var(--brand-color);
+    box-shadow: 0 0 10px var(--brand-color);
+}
+.control-bar .group{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+.control-bar .toggle-btn{
+    padding: 0.5rem 1rem;
+    background-color: var(--surface-color);
+    border: 2px solid var(--surface-lighter);
+    color: var(--surface-lighter);
+    border-radius: 10px;
     cursor: pointer;
+    font-weight: 900;
+    transition: 150ms ease;
+}
+.control-bar .toggle-btn.active{
+    border: 2px solid var(--brand-color);
+    color: var(--brand-color);
 }
 #robot-container{
     width: 100%;
@@ -79,29 +108,17 @@ header .logo-bg{
 .card.frc{background-color: var(--first-blue);}
 .card.hidden{display: none;}
 
-body:has(:popover-open) * {
-    pointer-events: none;
-}
-[popover]:popover-open,
-[popover]:popover-open * {
-    pointer-events: auto !important;
-}
-[popover] {
-    pointer-events: auto;
-}
-[popover]::backdrop {
+
+
+.robot-modal::backdrop {
     background-color: var(--overlay-color);
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    pointer-events: auto !important; 
 }
-[popover]:not(:popover-open) {
-    display: none !important;
-}
-[popover]:popover-open {
+.robot-modal [open]{
     position: fixed;
     top: 50%;
     left: 50%;
@@ -116,20 +133,20 @@ body:has(:popover-open) * {
     overflow: hidden;
     border: 1px solid #2d2d2d;
 }
-[popover] .info{
+.robot-modal .info{
     flex: 1;
     padding: 40px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
 }
-[popover] .title {
+.robot-modal .title {
     font-size: 2rem;
     margin: 0 0 10px 0;
     font-weight: 700;
     color: var(--text-color);
 }
-[popover] .github-btn{
+.robot-modal .github-btn{
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -142,32 +159,32 @@ body:has(:popover-open) * {
     border-radius: 8px;
     transition: background-color 0.2s ease, transform 0.1s ease;
 }
-[popover] .github-btn:hover {
+.robot-modal .github-btn:hover {
     background-color: #444d56;
 }
-[popover] .github-btn:active {
+.robot-modal .github-btn:active {
     transform: scale(0.98);
 }
-[popover] .viewer {
+.robot-modal .viewer {
     flex: 1;
     background-color: #181818;
     position: relative;
 }
-[popover] model-viewer {
+.robot-modal model-viewer {
     width: 100%;
     height: 100%;
     --poster-color: transparent;
 }
 @media (max-width: 768px) {
-    [popover]:popover-open {
+    .robot-modal[open]{
         flex-direction: column-reverse; /* Puts model on top for mobile */
         height: auto;
         max-width: 400px;
     }
-    [popover] .viewer {
+    .robot-modal .viewer {
         height: 300px;
     }
-    [popover] .info {
+    .robot-modal .info {
         padding: 24px;
     }
 }

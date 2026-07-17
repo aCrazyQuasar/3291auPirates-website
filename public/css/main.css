@@ -6,3 +6,6 @@
 /* Component Styles */
 @import "./components/nav.css";
 @import "./components/cards.css";
+@import "./components/header.css";
+@import "./components/modal.css";
+@import "./components/footer.css";
