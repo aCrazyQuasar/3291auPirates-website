@@ -19,4 +19,5 @@ header{
 header h1{
     z-index: 5;
     color: white;
+    font-size: min(90vw, 6rem);
 }
