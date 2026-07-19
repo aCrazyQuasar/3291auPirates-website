@@ -1,50 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 @font-face {
   font-family: "Pieces of Eight";
   src: url("../../assets/fonts/pieces-of-eight.ttf");
 }
-@import url('https://fonts.googleapis.com/css2?family=Carme&display=swap');
-h1, h2, h3, h4, h5, h6 {
-    font-family: "Pieces of Eight", sans-serif;
+h2, h3, h4, h5, h6 {
+  font-family: "Inter", sans-serif;
+  font-weight: bold;
 }
 h1 {
-  font-size: 3.5rem;    /* 56px - Perfect for main page titles (About, Gallery, Robots) */
+  font-size: min(20vw, 6rem);
   line-height: 1.15;
   margin-bottom: 0.5rem;
+  font-family: "Pieces of Eight", sans-serif;
 }
 
 h2 {
-  font-size: 2.5rem;    /* 40px - Major section headers inside pages */
+  font-size: 3rem;
   line-height: 1.2;
   margin-bottom: 0.5rem;
 }
 
 h3 {
-  font-size: 1.75rem;   /* 28px - Sub-sections, feature titles */
+  font-size: 2rem;
   line-height: 1.3;
   margin-bottom: 0.5rem;
 }
 
 h4 {
-  font-size: 1.25rem;   /* 20px - Card titles, prominent labels */
+  font-size: 1.5rem;
   line-height: 1.4;
   margin-bottom: 0.5rem;
 }
 
 h5 {
-  font-size: 1.0rem;    /* 16px - Bold UI text */
+  font-size: 1.25rem;
   font-weight: 700;
   line-height: 1.4;
   margin-bottom: 0.5rem;
 }
 
 h6 {
-  font-size: 0.875rem;  /* 14px - Small uppercase category tags or eyebrows */
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  font-size: 1rem;
   line-height: 1.4;
   margin-bottom: 0.5rem;
 }
 p, a, span, li{
-    font-family: 'Carme', sans-serif;
-    color: var(--text-color);
+  font-family: "Nunito", sans-serif;
+  color: var(--text-secondary);
 }

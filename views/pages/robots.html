@@ -19,16 +19,27 @@
         <a href="/">
             <img src="/assets/images/nav-logo.png" alt="Team 3291 Logo" class="logo">
         </a>
-        <ul class="nav-links">
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/gallery">Gallery</a></li>
-            <li><a href="/robots">Robots</a></li>
-        </ul>
-        <ul class="nav-btns">
-            <li><a href="/join" class="btn">Join</a></li>
-            <li><a href="/donate" class="btn">Donate</a></li>
-        </ul>
+        <input type="checkbox" id="sidebar-active">
+        <label for="sidebar-active" id="open-sidebar-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg>
+        </label>
+        <label for="sidebar-active" id="sidebar-overlay"></label>
+        <div class="nav-menu">
+            <label for="sidebar-active" id="close-sidebar-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
+            </label>
+            <ul class="nav-links">
+                <li><a class="nav-link" href="/">Home</a></li>
+                <li><a class="nav-link" href="/about">About</a></li>
+                <li><a class="nav-link" href="/gallery">Gallery</a></li>
+                <li><a class="nav-link" href="/robots">Robots</a></li>
+            </ul>
+            <ul class="nav-btns">
+                <li><a class="nav-btn" href="/join" class="btn">Join</a></li>
+                <li><a class="nav-btn" href="/donate" class="btn">Donate</a></li>
+            </ul>
+        </div>
+        
     </nav>
     <header>
         <canvas id="header-bg"></canvas>
@@ -48,8 +59,8 @@
     </main>
 
     <footer>
+        <h3>Team 3291 – The Golden Pirates</h3>
         <p>
-            Team 3291 – The Golden Pirates
             Sailing toward innovation through robotics, engineering, and teamwork. 
             Thanks for stopping by—fair winds, and see you at our next competition!
         </p>

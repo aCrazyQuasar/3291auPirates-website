@@ -1,40 +1,55 @@
-footer{
+footer {
     background-color: var(--surface-color);
+    color: var(--text-color);
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 2rem 3rem;
-    gap: 1rem;
+    padding: 3rem 2rem;
+    gap: 1.5rem;
+    border-top: 1px solid var(--surface-lighter);
 }
-footer p{
+footer h3{
+    text-align: center;
+}
+footer p {
     text-wrap: balance;
+    text-align: center;
+    margin: 0;
 }
-footer .social-btns{
+footer .social-btns {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
-    padding: 1rem;
+    gap: 1.25rem;
+    padding: 0.5rem;
 }
-footer .social-btns .social-btn{
+footer .social-btns .social-btn {
     border-radius: 50%;
     background-color: var(--surface-lighter);
-    padding: 15px;
+    width: 50px; 
+    height: 50px; 
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: 150ms ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
-footer svg{
-    width: 32px;
-    height: 32px;
+footer svg {
+    width: 22px; 
+    height: 22px;
     fill: var(--text-color);
+    transition: fill 0.3s ease;
 }
-footer .social-btns .social-btn:hover{
-    transform: translateY(-5px);
+footer .social-btns .social-btn:hover {
+    transform: translateY(-4px);
     background-color: var(--brand-color);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
-footer.social-btns .social-btn:active{
-    transform: translateY(0px);
+footer .social-btns .social-btn:hover svg {
+    fill: #ffffff; 
+}
+footer .social-btns .social-btn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
