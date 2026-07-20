@@ -30,6 +30,8 @@ router.get("/:id", async (req, res) => {
     }
 });
 
+// ---------- ALL ROUTES BELOW THIS MUST REQUIRE AUTH IN PRODUCTION ----------
+
 router.post("/", upload.fields([
     { name: "imageFile", maxCount: 1 },
     { name: "modelFile", maxCount: 1 }
@@ -44,7 +46,6 @@ router.post("/", upload.fields([
 
       const imgFileRaw = req.files.imageFile[0];
       const glbFileRaw = req.files.modelFile[0];
-
       // Convert multer buffers into standard File objects that UTApi expects
       const imageToUpload = new File([imgFileRaw.buffer], imgFileRaw.originalname, { type: imgFileRaw.mimetype });
       const modelToUpload = new File([glbFileRaw.buffer], glbFileRaw.originalname, { type: glbFileRaw.mimetype });
@@ -60,8 +61,6 @@ router.post("/", upload.fields([
         console.error("Cloud Error:", imgUploadResult.error || glbUploadResult.error);
         return res.status(502).json({ error: "Failed uploading assets to cloud storage provider." });
       }
-
-      // 2. Write everything to your Prisma database
       const newRobot = await prisma.robot.create({
         data: {
           name,
@@ -69,7 +68,6 @@ router.post("/", upload.fields([
           season,
           description,
           githubLink: githubLink || "https://github.com/AuPiratesFIRST",
-          // Clean up warnings by prioritizing ufsUrl directly
           image: imgUploadResult.data.ufsUrl, 
           imageKey: imgUploadResult.data.key,
           model: glbUploadResult.data.ufsUrl,
@@ -79,21 +77,23 @@ router.post("/", upload.fields([
 
       res.status(201).json(newRobot);
     } catch (error) {
-      console.error("❌ Complete Endpoint Error Breakdown:", error);
+      console.error("Complete Endpoint Error Breakdown:", error);
       res.status(500).json({ error: error.message || "Internal server crash." });
     }
 });
 
-// Express route handler example
-router.put('/:id', async (req, res) => {
+router.put('/:id', upload.none(), async (req, res) => {
   const { id } = req.params;
-  const { name, description, githubLink } = req.body;
+  const { name, year, description, githubLink } = req.body;
+
+  const pYear = parseInt(year, 10);
 
   try {
     const updatedRobot = await prisma.robot.update({
-      where: { id: parseInt(id) }, // or just id if your DB uses UUID strings
+      where: { id: parseInt(id) },
       data: {
         name,
+        year: pYear,
         description,
         githubLink
       }
@@ -106,7 +106,6 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// DELETE route remains exactly the same
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
   try {

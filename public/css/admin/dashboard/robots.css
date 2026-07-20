@@ -1,22 +1,21 @@
 .robot-display{
     margin: 0 auto;
-    width: 90%;
-    background-color: var(--surface-color);
-    border-radius: 20px;
-    box-shadow: 0 0 20px var(--shadow-color);
     padding: 1rem;
     box-sizing: border-box;
 }
 .control-bar{
     display: flex;
-    justify-content: space-between; 
-    align-items: center;            
-    width: 100%;
-    padding: 16px 24px;
-    border: 1px solid var(--surface-lighter);
-    border-radius: 20px;
-    font-size: 1.05rem;
+    justify-content: space-between;
     box-sizing: border-box;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: var(--surface-color);
+    width: min(1200px, 90%);
+    margin: auto;
+    margin-top: 2rem;
+    border-radius: 15px;
+    font-size: 1.05rem;
 }
 .control-bar .btns{
     display: flex;
@@ -62,17 +61,20 @@
     border: 1px solid var(--info-bg);
 }
 .control-bar input[type="text"]{
-    width: 300px;
-    background-color: var(--surface-light);
-    color: var(--text-color);
-    border: 1px solid var(--surface-lighter);
-    padding: 0.75rem 1.5rem;
+    background-color: var(--surface-color);
+    border: 2px solid var(--surface-lighter);
     font-size: 1.05rem;
-    border-radius: 15px;
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    color: var(--text-color);
+    transition: 300ms ease;
 }
-input:focus{
+.control-bar input[type=text]:focus{
     outline: none;
+    border: 2px solid var(--brand-color);
+    box-shadow: 0 0 10px var(--brand-color);
 }
+
 #robot-container{
     width: 100%;
     display: flex;
@@ -98,9 +100,10 @@ input:focus{
     height: 500px;
     background-color: var(--surface-light);
     border-radius: 20px;
-    box-shadow: 0 0 20px #00000080;
+    cursor: pointer;
     border: none;
     position: relative;
+    border: 2px solid var(--surface-lighter);
     transition: 0.3s ease;
 }
 .robot-card:hover img{
@@ -135,8 +138,11 @@ input:focus{
 .robot-card .text-box p{
     font-weight: bold;
 }
-.robot-card.ftc{background-color: var(--first-orange);}
-.robot-card.frc{background-color: var(--first-blue);}
+.robot-card.ftc p{color: var(--first-orange);}
+.robot-card.frc p{color: var(--first-blue);}
+.robot-card.hidden{display: none;}
+
+/* Admin Btns */
 .robot-card .btns{
     visibility: hidden;
     opacity: 0;
@@ -178,307 +184,4 @@ input:focus{
 }
 .robot-card .btns .delete-btn{
     background-color: var(--error-color);
-}
-
-body:has(:popover-open) * {
-    pointer-events: none;
-}
-.robot-popover:popover-open,
-.robot-popover:popover-open * {
-    pointer-events: auto !important;
-}
-.robot-popover {
-    pointer-events: auto;
-}
-.robot-popover::backdrop {
-    background-color: var(--overlay-color);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    pointer-events: auto !important; 
-}
-.robot-popover:not(:popover-open) {
-    display: none !important;
-}
-.robot-popover:popover-open {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: row;
-    width: fit-content;
-    max-width: 90%;
-    height: 450px;
-    background-color: #1e1e1e;
-    border-radius: 16px;
-    overflow: hidden;
-    border: 1px solid #2d2d2d;
-}
-.robot-popover .info{
-    flex: 1;
-    padding: 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-}
-.robot-popover .title {
-    font-size: 2rem;
-    margin: 0 0 10px 0;
-    font-weight: 700;
-    color: var(--text-color);
-}
-.robot-popover .github-btn{
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: fit-content;
-    padding: 12px 24px;
-    background-color: #2f363d;
-    color: #ffffff;
-    text-decoration: none;
-    font-weight: 600;
-    border-radius: 8px;
-    transition: background-color 0.2s ease, transform 0.1s ease;
-}
-.robot-popover .github-btn:hover {
-    background-color: #444d56;
-}
-.robot-popover .github-btn:active {
-    transform: scale(0.98);
-}
-.robot-popover .viewer {
-    flex: 1;
-    background-color: #181818;
-    position: relative;
-}
-.robot-popover model-viewer {
-    width: 100%;
-    height: 100%;
-    --poster-color: transparent;
-}
-@media (max-width: 768px) {
-    .robot-popover:popover-open {
-        flex-direction: column-reverse; /* Puts model on top for mobile */
-        height: auto;
-        max-width: 400px;
-    }
-    .robot-popover .viewer {
-        height: 300px;
-    }
-    .robot-popover .info {
-        padding: 24px;
-    }
-}
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-input[type=number] {
-  -moz-appearance: textfield;
-}
-#addRobotModal{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: fit-content;
-    height: fit-content;
-    background-color: transparent;
-    border: none;
-}
-#addRobotModal::backdrop{
-    background-color: var(--overlay-color);
-}
-#robotForm {
-    background-color: var(--surface-color);
-    border: 1px solid var(--surface-lighter);
-    border-radius: 12px;
-    padding: 2rem;
-    max-width: 850px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    font-family: system-ui, -apple-system, sans-serif;
-}
-
-#robotForm .inputs {
-    display: flex;
-    gap: 2.5rem;
-    margin-bottom: 2rem;
-}
-
-/* --- Left Side: Text Inputs --- */
-#robotForm .text-inputs {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-}
-
-#robotForm .text-inputs input[type="text"],
-#robotForm .text-inputs input[type="number"],
-#robotForm .text-inputs input[type="url"],
-#robotForm .text-inputs textarea {
-    width: 100%;
-    box-sizing: border-box;
-    font-size: 1rem;
-    padding: 0.75rem 1rem;
-    border: 1px solid var(--surface-lighter);
-    border-radius: 6px;
-    transition: border-color 0.2s, box-shadow 0.2s;
-    background-color: var(--surface-light);
-    caret-color: var(--text-color);
-    color: var(--text-color);
-}
-
-#robotForm .text-inputs input:focus,
-#robotForm .text-inputs textarea:focus {
-    outline: none;
-    border-color: var(--brand-color);
-    box-shadow: 0 0 3px var(--brand-color);
-}
-
-#robotForm .text-inputs textarea {
-    min-height: 120px;
-    resize: none;
-}
-
-/* --- Radio Toggle (FRC / FTC) --- */
-#robotForm .league-toggle {
-    display: flex;
-    border: 1px solid var(--surface-lighter);
-    border-radius: 6px;
-    overflow: hidden;
-    width: 100%;
-}
-
-#robotForm .text-inputs input[type="radio"] {
-    display: none;
-}
-
-#robotForm .league-toggle label {
-    flex: 1;
-    text-align: center;
-    padding: 0.75rem;
-    cursor: pointer;
-    background: var(--surface-light);
-    color: var(--text-color);
-    font-weight: 600;
-    transition: all 0.2s;
-}
-
-#robotForm .text-inputs input[type="radio"]:checked + label {
-    background-color: var(--brand-color);
-    color: var(--text-color);
-}
-
-/* --- Right Side: File Upload Drop Zones --- */
-#robotForm .file-inputs {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-#robotForm .field-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-#robotForm .field-label {
-    font-weight: 600;
-    color: var(--text-color);
-    font-size: 0.9rem;
-}
-
-/* --- Integrated Drop Zone Style --- */
-#robotForm .drop-zone {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 125px;
-    border: 2px dashed var(--surface-lighter);
-    border-radius: 8px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    transition: background-color 0.3s, border-color 0.3s;
-    box-sizing: border-box;
-    background-color: var(--surface-light);
-}
-
-#robotForm .drop-zone:hover {
-    background-color: var(--surface-light);
-    border-color: var(--brand-color);
-}
-
-#robotForm .drop-zone input[type="file"] {
-    display: none;
-}
-
-#robotForm .drop-zone-text {
-    font-size: 0.9rem;
-    color: var(--text-color);
-    text-align: center;
-    padding: 0 1rem;
-    z-index: 2;
-    mix-blend-mode: difference;
-}
-
-#robotForm .preview-img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    filter: saturate(0.5) brightness(0.7);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-/* --- Action Buttons --- */
-#robotForm .btns {
-    display: flex;
-    justify-content: flex-end;
-    gap: 1rem;
-    border-top: 1px solid var(--surface-lighter);
-    padding-top: 1.5rem;
-}
-
-#robotForm button {
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    font-weight: 600;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-#robotForm #submitBtn {
-    background-color: var(--brand-color);
-    color: var(--inverse-text-color);
-    border: none;
-}
-
-#robotForm #submitBtn:hover {
-    background-color: var(--brand-color);
-}
-
-#robotForm #closeRobotModalBtn {
-    background-color: transparent;
-    color: var(--text-color);
-    border: 1px solid var(--surface-lighter);
-}
-
-#robotForm #closeRobotModalBtn:hover {
-    background-color: var(--surface-light);
 }
