@@ -1,0 +1,93 @@
+dialog.robot-modal::backdrop {
+    background-color: var(--overlay-color);
+}
+dialog.robot-modal{
+    display: flex;
+    flex-direction: row;
+    width: 850px;
+    max-width: 90%;
+    height: 450px;
+    background-color: var(--surface-color);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--surface-lighter);
+}
+dialog.robot-modal .info{
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+dialog.robot-modal .title {
+    font-size: 2rem;
+    margin: 0 0 10px 0;
+    font-weight: 700;
+    color: var(--text-color);
+}
+dialog.robot-modal .btns{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+}
+dialog.robot-modal .github-btn{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    padding: 12px 24px;
+    background-color: var(--brand-color);
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+dialog.robot-modal .close-btn{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    padding: 12px 24px;
+    border: 2px solid var(--surface-lighter);
+    background: var(--surface-color);
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+dialog.robot-modal .github-btn:hover {
+    background-color: var(--brand-dark);
+}
+dialog.robot-modal .github-btn:active, dialog.robot-modal .close-btn:active {
+    transform: scale(0.98);
+}
+dialog.robot-modal .close-btn:hover{
+    background-color: var(--surface-light);
+}
+dialog.robot-modal .viewer {
+    flex: 1;
+    background-color: var(--surface-light);
+    position: relative;
+}
+dialog.robot-modal model-viewer {
+    width: 100%;
+    height: 100%;
+    --poster-color: transparent;
+}
+@media (max-width: 768px) {
+    dialog.robot-modal[open]{
+        flex-direction: column-reverse; /* Puts model on top for mobile */
+        height: auto;
+        max-width: 400px;
+    }
+    dialog.robot-modal .viewer {
+        height: 300px;
+    }
+    dialog.robot-modal .info {
+        padding: 24px;
+    }
+}

@@ -18,7 +18,7 @@ router.get("/:id", async (req, res) => {
     try {
         const robot = await prisma.robot.findUnique({
             where: {
-                id: id
+                id: parseInt(id, 10)
             }
         });
         if (!robot) {
@@ -85,7 +85,7 @@ router.post("/", upload.fields([
 });
 
 // Express route handler example
-router.put('/api/robots/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
   const { id } = req.params;
   const { name, description, githubLink } = req.body;
 

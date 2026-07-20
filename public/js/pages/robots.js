@@ -1,5 +1,6 @@
 let ftcRobots = [];
 let frcRobots = [];
+let robotModalIds = [];
 let numRobots = 0;
 let ftcShown = true;
 let frcShown = true;
@@ -17,6 +18,50 @@ async function initRobotCards() {
         frcRobots = robotsContainer.querySelectorAll('.frc');
     }
     robotCountOut.innerText = numRobots;
+}
+
+// Modal stuff
+async function showRobotModal(id) {
+    if(robotModalIds.includes(id)) {
+        const modal = document.getElementById(`${id}-robot-modal`);
+        modal.showModal();
+    } else {
+        try {
+            const response = await fetch(`/api/robots/${id}`);
+            const robot = await response.json();
+            const modalWrapper = document.createElement('div');
+            modalWrapper.innerHTML = `
+                <dialog id="${robot.id}-robot-modal" class="robot-modal">
+                    <div class="info">
+                        <h1 class="title">${robot.name}</h1>
+                        <p class="description">${robot.description}</p>
+                        <div class="btns">
+                            <a href="${robot.githubLink}" target="_blank" class="github-btn">
+                                View on GitHub
+                            </a>
+                            <button class="close-btn" commandfor="${robot.id}-robot-modal" command="close">Close</button>
+                        </div>
+                    </div>
+                    <div class="viewer">
+                        <model-viewer 
+                            src="${robot.model}" 
+                            alt="${robot.name} Interactive 3D Model" 
+                            camera-controls 
+                            auto-rotate 
+                            shadow-intensity="1.5"
+                            interaction-prompt="none">
+                        </model-viewer>
+                    </div>
+                </dialog>
+            `;
+            document.body.appendChild(modalWrapper.firstElementChild);
+            const modal = document.getElementById(`${id}-robot-modal`);
+            modal.showModal();
+            robotModalIds.push(id)
+        } catch (error) {
+            console.error("Failed to load robots:", error);
+        }
+    }
 }
 
 async function createRobotCards() {
@@ -42,34 +87,13 @@ async function createRobotCards() {
             const cls = robot.season.toLowerCase();
             
             return `
-                <button class="card ${cls}" commandfor="${robot.id}-robot-modal" command="show-modal">
+                <button class="robot-card ${cls}" onclick="showRobotModal(${robot.id})">
                     <img src="${robot.image}" alt="${robot.name} Picture">
                     <div class="text-box">
-                        <h3>${robot.name}</h3>
+                        <h4>${robot.name}</h4>
                         <p>${robot.year} | ${robot.season}</p>
                     </div>
                 </button>
-                
-                <dialog id="${robot.id}-robot-modal" class="robot-modal">
-                    <div class="info">
-                        <h1 class="title">${robot.name}</h1>
-                        <p class="description">${robot.description}</p>
-                        <a href="${robot.githubLink}" target="_blank" class="github-btn">
-                            View on GitHub
-                        </a>
-                        <button class="close-btn" commandfor="${robot.id}-robot-modal" command="close">Close</button>
-                    </div>
-                    <div class="viewer">
-                        <model-viewer 
-                            src="${robot.model}" 
-                            alt="${robot.name} Interactive 3D Model" 
-                            camera-controls 
-                            auto-rotate 
-                            shadow-intensity="1.5"
-                            interaction-prompt="none">
-                        </model-viewer>
-                    </div>
-                </dialog>
             `;
         }).join('');
 
@@ -84,6 +108,7 @@ async function createRobotCards() {
 
 // Kick off the initialization
 initRobotCards();
+
 
 frcToggleBtn.addEventListener("click", () => {
     if(!frcShown) {
