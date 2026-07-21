@@ -173,8 +173,8 @@ input[type=number] {
     background-color: var(--brand-color);
 }
 #robotForm #submitbtn:disabled{
-    background-color: var(--surface-light);
-    color: var(--text-color);
+    background-color: var(--surface-light) !important;
+    color: var(--text-color) !important;
 }
 #robotForm #closeRobotModalBtn {
     background-color: transparent;

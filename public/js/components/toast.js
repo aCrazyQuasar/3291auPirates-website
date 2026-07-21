@@ -12,7 +12,7 @@ class AppToast extends HTMLElement {
         }, 3000);
 
         this.addEventListener("transitionend", () => {
-            if(this.classList.contains('hide')) {
+            if(!this.classList.contains('show')) {
                 this.remove();
             }
         });
@@ -48,7 +48,5 @@ function showToast(type, title, message) {
     toastContainer.appendChild(toast);
 }
 
-showToast(ToastType.SUCCESS, "Testing 123", " This is just a test");
-showToast(ToastType.WARNING, "Testing 123", " This is just a test");
-showToast(ToastType.ERROR, "Testing 123", " This is just a test");
-showToast(ToastType.INFO, "Testing 123", " This is just a test");
+export {showToast};
+export {ToastType};

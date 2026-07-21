@@ -1,3 +1,7 @@
+import { showToast } from "../../components/toast.js";
+import { ToastType } from "../../components/toast.js";
+import { generateRobotCards } from "./robotDisplay.js";
+
 // ---------- ADD ROBOTS ----------
 const addRobotBtn = document.getElementById('addRobotBtn');
 const addRobotModal = document.getElementById('addRobotModal');
@@ -77,7 +81,7 @@ form.addEventListener("submit", async (event) => {
         });
 
         if (dbResponse.ok) {
-            alert("🎉 Robot successfully uploaded and written to database!");
+            showToast(ToastType.SUCCESS, "Robot Uploaded!", "Your robot was uploaded succesfully!");
 
             // Reset the form
             form.reset();
@@ -96,13 +100,16 @@ form.addEventListener("submit", async (event) => {
                     preview.style.backgroundImage = "none"; // Clears it if you set it as a background image
                 }
             });
+
+            generateRobotCards();
         } else {
             const errData = await dbResponse.json();
             alert(`Upload failed: ${errData.error}`);
+            showToast(ToastType.ERROR, "Robot Failed Upload", "Your robot wasn't uploaded due to a server error!");
         }
     } catch (error) {
         console.error(error);
-        alert(`Error: ${error.message}`);
+        showToast(ToastType.ERROR, "Robot Failed Upload", "Your robot wasn't uploaded due to a server error!");
     } finally {
         submitBtn.disabled = false;
         submitBtn.innerText = "Save Robot";
@@ -138,11 +145,11 @@ document.addEventListener('submit', async (event) => {
             throw new Error(`Server error: ${response.status}`);
         }
         form.reset();
-        alert('success editing');
+        showToast(ToastType.SUCCESS, "Robot Was Saved", "Your robot was successfully saved to the cloud!");
         generateRobotCards();
-
     } catch (error) {
         console.error("Failed to update robot:", error);
+        showToast(ToastType.ERROR, "Robot Wasn't Saved", "Your robot was unable to be saved to the cloud.");
     } finally {
         if (submitBtn) {
             submitBtn.disabled = false;
@@ -160,15 +167,21 @@ async function deleteRobot(id) {
 
         if(!response.ok) {
             throw new Error(`Error: ${response.status}`);
+            showToast(ToastType.ERROR, "Failed to delete robot", "A server error caused the deletion of your robot to halt.");
         }
         generateRobotCards();
         if (response.status !== 204) {
             const data = await response.json();
             console.log('Deleted successfully:', data);
+            showToast(ToastType.SUCCESS, "Robot Deleted!", "Your robot was deleted successfully!");
         } else {
             console.log('Deleted successfully (No Content).');
+            showToast(ToastType.SUCCESS, "Robot Deleted!", "Your robot was deleted successfully!");
         }
     } catch (error) {
         console.error('Failed to delete robot:', error);
+        showToast(ToastType.ERROR, "Failed to delete robot", "A server error caused the deletion of your robot to halt.");
     }
 }
+
+export {deleteRobot};
