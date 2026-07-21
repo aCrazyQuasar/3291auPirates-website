@@ -20,7 +20,8 @@ dialog[open]{
     }
 }
 dialog::backdrop{
-    background-color: var(--shadow-color);
+    background-color: var(--overlay-color);
+    backdrop-filter: blur(5px);
     opacity: 0;
 
     transition: 

@@ -71,7 +71,7 @@ async function showRobotEditModal(id) {
                 <dialog class="robot-edit-modal" id="${robot.id}-robot-modal">
                     <form class="edit-robot-form" data-robot-id="${robot.id}">
                         <div class="info">
-                            <h1 class="title">Edit Robot</h1>
+                            <h2 class="title">Edit Robot</h2>
                             
                             <div class="form-group">
                                 <label for="edit-name-${robot.id}">Robot Name</label>
