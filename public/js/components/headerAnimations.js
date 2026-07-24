@@ -1,3 +1,4 @@
+// ---------- Land Stuff ----------
 function drawBeach(canvas, ctx, x1, x2, groundY, time=undefined) {
     const width = Math.abs(x2 - x1);
     const startX = Math.min(x1, x2);
@@ -46,10 +47,11 @@ function drawBeach(canvas, ctx, x1, x2, groundY, time=undefined) {
     });
     ctx.restore();
 }
+
+// ---------- Water Stuff --------
 function waveY(canvas, ctx, x, percent, time){
     return canvas.height*percent
-        +(Math.sin(x*.008+time)*12
-        +Math.sin(x*.018+time*1.5)*5) * 2;
+        +(Math.sin(x*.008+time)*15);
 }
 function drawOcean(canvas, ctx, percent, time) {
     ctx.beginPath();
@@ -68,5 +70,70 @@ function drawOcean(canvas, ctx, percent, time) {
     ctx.fillStyle = g;
     ctx.fill();
 }
+// boat
+const boatImage = new Image();
+boatImage.src = '/assets/images/pirate-ship-vector.png';
+function drawBoat(canvas, ctx, xPercent, yPercent, isFlipped = false, time) {
+    const x = canvas.width * xPercent;
+    const y = waveY(canvas, ctx, x, yPercent, time);
+    const sampleOffset = 5;
+    const yAhead = waveY(canvas, ctx, x + sampleOffset, yPercent, time);
+    const angle = (Math.atan2(yAhead - y, sampleOffset)) * 0.8;
 
-export {drawBeach, drawOcean};
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(angle);
+
+    if (isFlipped) {
+        ctx.scale(-1, 1);
+    }
+
+    const boatWidth = canvas.width * 0.15;
+    const boatHeight = canvas.width * 0.15;
+    ctx.drawImage(boatImage, -boatWidth / 2, -boatHeight + (boatHeight * 0.1), boatWidth, boatHeight);
+    ctx.restore();
+}
+
+// ---------- Sky stuff ----------
+const SkyModes = {
+    DAY: "day",
+    NIGHT: "night",
+    SUNRISE: "sunrise",
+    SUNSET: "sunset"
+};
+function drawSky(canvas, ctx, mode = 'night') {
+    const g = ctx.createLinearGradient(0, 0, 0, canvas.height);
+    const palettes = {
+        day: [
+            { stop: 0, color: '#1e5799' },   // Deep blue sky top
+            { stop: 0.6, color: '#2989d8' }, // Vibrant sky blue
+            { stop: 1, color: '#89cff0' }    // Bright horizon
+        ],
+        night: [
+            { stop: 0, color: '#090a1e' },   // Dark cosmic top
+            { stop: 0.6, color: '#1b1b4b' }, // Deep indigo mid
+            { stop: 1, color: '#311d66' }    // Sci-fi purple-tinted horizon
+        ],
+        sunrise: [
+            { stop: 0, color: '#15173c' },   // Fading night sky
+            { stop: 0.5, color: '#883a62' }, // Warm violet-pink
+            { stop: 0.8, color: '#f37355' }, // Soft dawn orange
+            { stop: 1, color: '#fdd38d' }    // Golden horizon glow
+        ],
+        sunset: [
+            { stop: 0, color: '#1a0933' },   // Deep purple dusk sky
+            { stop: 0.45, color: '#682051' },// Rich magenta
+            { stop: 0.75, color: '#e85338' },// Radiant sunset orange
+            { stop: 1, color: '#fba949' }    // Fiery horizon
+        ]
+    };
+
+    const activePalette = palettes[mode.toLowerCase()] || palettes.night;
+    activePalette.forEach(item => {
+        g.addColorStop(item.stop, item.color);
+    });
+
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
+export {drawBeach, drawOcean, drawBoat, SkyModes, drawSky};
